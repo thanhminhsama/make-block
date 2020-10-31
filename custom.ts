@@ -14,25 +14,29 @@ enum MyEnum {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon=""
-namespace custom {
-    /**
-     * TODO: describe your function here
-     * @param n describe parameter here, eg: 5
-     * @param s describe parameter here, eg: "Hello"
-     * @param e describe parameter here
-     */
-    //% block
-    export function foo(n: number, s: string, e: MyEnum): void {
-        // Add code here
-    }
+//% weight=100 color=#f7ce6d icon="\uf07c" // thay đổi màu và icon của file block mình tạo
+
+namespace myBlock {
 
     /**
      * TODO: describe your function here
      * @param value describe value here, eg: 5
      */
-    //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
+    //% block="Set Frequency|pin %pin| %Frequency Hz"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.tooltips="false"
+    export function setFrequency(pin: AnalogPin ,Frequency: number ): void {
+        Frequency = 1000000/Frequency
+        pins.analogSetPeriod(pin, Frequency)
+    }
+
+    //% block="Set Frequency|pin %pin| PWM %PWM "
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.tooltips="false"
+    //% PWM.min=0 PWM.max=100
+    export function setPWM(pin: AnalogPin ,PWM: number ): void {
+        pins.map(PWM, 0, 100, 0, 1023)
+        pins.analogWritePin(pin, PWM)
+
     }
 }
