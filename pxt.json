@@ -6,7 +6,6 @@
         "radio": "*"
     },
     "files": [
-        "main.ts",
         "README.md",
         "custom.ts"
     ],
